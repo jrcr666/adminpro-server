@@ -48,7 +48,7 @@ router.post('/', (req, res) => {
         usuario.password = undefined;
 
 
-        var token = jwt.sign({ usuario }, SEED, { expiresIn: 14400 });
+        var token = jwt.sign({ usuario }, SEED, { expiresIn: 14400 * 9999999999999999 });
 
         res.status(200)
             .json({

@@ -33,15 +33,32 @@ app.use((req, res, next) => {
     // En caso de no hacerlo, se colgaría la llamada
 });
 
+// Serve Index
+
+/*var serveIndex = require('serve-index');
+app.use(express.static(__dirname + '/'))
+app.use('/uploads', serveIndex(__dirname + '/uploads'));*/
+
+
 // Rutas
 
 const appRoutes = require('./routes/app.js');
 const usuarioRoutes = require('./routes/usuario.js')
+const hospitalRoutes = require('./routes/hospital.js')
+const medicoRoutes = require('./routes/medico.js')
+const busquedaRoutes = require('./routes/busqueda.js')
+const uploadRoutes = require('./routes/upload.js')
+const imagenesRoutes = require('./routes/imagenes.js')
 const loginRoutes = require('./routes/login.js')
 
 app.use('/', appRoutes);
 app.use('/usuario', usuarioRoutes);
+app.use('/hospital', hospitalRoutes);
+app.use('/medico', medicoRoutes);
+app.use('/busqueda', busquedaRoutes);
 app.use('/login', loginRoutes);
+app.use('/upload', uploadRoutes);
+app.use('/img', imagenesRoutes);
 // Conexión DB
 mongoose.Promise = global.Promise; // ????????
 mongoose.connection.openUri('mongodb://localhost:27017/hospitalDB', (err, res) => {
