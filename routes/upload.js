@@ -42,7 +42,7 @@ app.put('/:tipo/:id', function(req, res) {
 
     var archivo = req.files.imagen;
     var nombreArchivo = archivo.name.split('.');
-    var extensionArchivo = nombreArchivo[nombreArchivo.length - 1];
+    var extensionArchivo = nombreArchivo[nombreArchivo.length - 1].toLowerCase();
 
     nombreArchivo.pop();
     nombreArchivo = nombreArchivo.join('.');
@@ -155,8 +155,8 @@ function subirPorTipo(tipo, id, nombreArchivo, res) {
                 var pathViejo = './uploads/medicos/' + medico.img;
 
                 // si existe, elimina la imagen anterior
-                if (fs.existsSync(pathViejo)) {
-                    fs.unlinkSync(pathViejo);
+                if (fs.exists(pathViejo)) {
+                    fs.unlink(pathViejo);
                 }
 
                 medico.img = nombreArchivo;

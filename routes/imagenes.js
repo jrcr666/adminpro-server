@@ -16,9 +16,9 @@ app.get('/:tipo/:img', function(req, res) {
     var img = req.params.img;
     var path = `./uploads/${tipo}/`;
 
-    var tiposDeColecciones = ['usuarios', 'medicos', 'hospitales'];
+    //var tiposDeColecciones = ['usuarios', 'medicos', 'hospitales'];
 
-    if (!tiposDeColecciones.includes(tipo)) {
+    /*if (!tiposDeColecciones.includes(tipo)) {
         return res.status(400).json({
             ok: false,
             mensaje: 'Colección no válida',
@@ -26,7 +26,7 @@ app.get('/:tipo/:img', function(req, res) {
                 message: 'Las extensiones válidas son: ' + tiposDeColecciones.join(', ')
             }
         });
-    }
+    }*/
     console.log(`${path}${img}`);
     fs.exists(`${path}${img}`, existe => {
         if (!existe) {
@@ -36,7 +36,7 @@ app.get('/:tipo/:img', function(req, res) {
 
 
         }
-    res.sendFile(`${img}`,{ root :  path});
+        res.sendFile(`${img}`, { root: path });
     });
 });
 

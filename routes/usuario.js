@@ -14,7 +14,7 @@ app.get('/', (req, res, next) => {
 
     desde = Number(desde);
 
-    Usuario.find({}, 'nombre email img role') // valores que queremos que devuelva
+    Usuario.find({}, 'nombre email img role google') // valores que queremos que devuelva
         .skip(desde) // desde donde cuenta
         .limit(5) // hasta donde cuenta
         .exec((err, usuarios) => { // despues de los filtros llama ala fnción de búsqueda
@@ -98,7 +98,7 @@ app.put('/:id', mdAutentification, (req, res, next) => {
 
 // ================================================
 
-app.post('/', mdAutentification, (req, res, next) => {
+app.post('/', (req, res, next) => {
 
     var body = req.body;
 

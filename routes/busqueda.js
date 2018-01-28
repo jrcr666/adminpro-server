@@ -20,10 +20,10 @@ router.get('/coleccion/:tabla/:busqueda', (req, res, next) => {
             promesa = buscarUsuarios(busqueda, regex);
             break;
         case 'hospitales':
-            promesa = buscarMedicos(busqueda, regex);
+            promesa = buscarHospitales(busqueda, regex);
             break;
         case 'medicos':
-            promesa = buscarHospitales(busqueda, regex);
+            promesa = buscarMedicos(busqueda, regex);
             break;
         default:
             res.status(500)
@@ -128,7 +128,7 @@ function buscarUsuarios(busqueda, regex) {
 
     return new Promise((resolve, reject) => {
 
-        Usuario.find({}, 'nombre, email role')
+        Usuario.find({}, 'nombre email role')
             .or([{ nombre: regex }, { email: regex }])
             .exec((err, usuarios) => {
                 if (err) {
