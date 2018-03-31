@@ -67,6 +67,7 @@ app.use('/busqueda', busquedaRoutes);
 app.use('/login', loginRoutes);
 app.use('/upload', uploadRoutes);
 app.use('/img', imagenesRoutes);
+
 // Conexión DB
 mongoose.Promise = global.Promise; // ????????
 mongoose.connection.openUri('mongodb://localhost:27017/hospitalDB', (err, res) => {

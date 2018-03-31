@@ -66,7 +66,8 @@ router.post('/google', (req, res) => {
                                 ok: true,
                                 usuario,
                                 id: usuario._id,
-                                token
+                                token,
+                                menu: obternerMenu(usuario.role)
                             });
                     }
                 } else {
@@ -97,7 +98,8 @@ router.post('/google', (req, res) => {
                                 mensaje: 'Usuario creado correctamente',
                                 usuario: usuarioDB,
                                 id: usuarioDB._id,
-                                token
+                                token,
+                                menu: obternerMenu(usuarioDB.role)
                             });
                     })
                 }
@@ -157,9 +159,40 @@ router.post('/', (req, res) => {
                 ok: true,
                 usuario,
                 id: usuario._id,
-                token
+                token,
+                menu: obternerMenu(usuario.role)
             });
     })
 });
+
+function obternerMenu(ROLE) {
+
+    var menu = [{
+            titulo: 'Principal',
+            icono: 'mdi mdi-gauge',
+            subMenu: [
+                { titulo: 'Dashboard', url: '/dashboard' },
+                { titulo: 'ProgressBar', url: '/progress' },
+                { titulo: 'Gráficas', url: '/graficas1' },
+                { titulo: 'Promesas', url: '/promesas' },
+                { titulo: 'RxJs', url: '/rxjs' }
+            ]
+        },
+        {
+            titulo: 'Mantenimientos',
+            icono: 'mdi mdi-folder-lock-open',
+            subMenu: [
+                { titulo: 'Hospitales', url: '/hospitales' },
+                { titulo: 'Médicos', url: '/medicos' }
+            ]
+        }
+    ];
+
+    if (ROLE === 'ADMIN_ROLE') {
+        console.log('ADMIN');
+        menu[1].subMenu.unshift({ titulo: 'Usuarios', url: '/usuarios' })
+    }
+    return menu;
+}
 
 module.exports = router;

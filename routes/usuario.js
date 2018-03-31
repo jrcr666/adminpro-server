@@ -6,7 +6,7 @@ var app = express();
 
 const Usuario = require('./../models/usuario.js');
 const SEED = require('./../config/config.js').SEED;
-const mdAutentification = require('../middlewares/autentication.js').verificaToken;
+const mdAutentification = require('../middlewares/autentication.js');
 
 app.get('/', (req, res, next) => {
 
@@ -44,7 +44,7 @@ app.get('/', (req, res, next) => {
 // ================================================
 
 
-app.put('/:id', mdAutentification, (req, res, next) => {
+app.put('/:id', [mdAutentification.verificaToken, mdAutentification.verificaADMIN_ROLE_o_MISMO], (req, res, next) => {
 
     var id = req.params.id;
     var body = req.body;
@@ -134,7 +134,7 @@ app.post('/', (req, res, next) => {
 });
 
 
-app.delete('/:id', mdAutentification, (req, res, next) => {
+app.delete('/:id', [mdAutentification.verificaToken, mdAutentification.verificaADMIN_ROLE_o_MISMO], (req, res, next) => {
 
     var id = req.params.id;
 

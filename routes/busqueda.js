@@ -128,7 +128,7 @@ function buscarUsuarios(busqueda, regex) {
 
     return new Promise((resolve, reject) => {
 
-        Usuario.find({}, 'nombre email role')
+        Usuario.find({}, 'nombre email img role')
             .or([{ nombre: regex }, { email: regex }])
             .exec((err, usuarios) => {
                 if (err) {

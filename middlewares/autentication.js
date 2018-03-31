@@ -36,6 +36,19 @@ exports.verificaToken = (req, res, next) => {
              decoded
          });*/
     });
+}
 
-
+exports.verificaADMIN_ROLE_o_MISMO = (req, res, next) => {
+    var id = req.params.id;
+    var usuario = req.usuario;
+    if (usuario.role === 'ADMIN_ROLE' || usuario._id === id) {
+        next();
+        return;
+    } else {
+        return res.status(401).json({
+            ok: false,
+            mensaje: 'Token incorrecto - No es administrador',
+            errors: { message: 'Opcon no disponible' }
+        });
+    }
 }
